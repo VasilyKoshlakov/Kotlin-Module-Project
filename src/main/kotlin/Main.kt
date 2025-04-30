@@ -1,4 +1,8 @@
 fun main() {
     println("Приложение \"Заметки\"")
-    ArchiveMenu().start()
+    val archiveMenu = ArchiveMenu()
+    while (true) {
+        archiveMenu.start()
+        break
+    }
 }

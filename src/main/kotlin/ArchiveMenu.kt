@@ -2,7 +2,10 @@ class ArchiveMenu : Menu() {
     private val archives = mutableListOf<Archive>()
 
     init {
-        menuItems.add(MenuItem("Создать архив") { createArchive() })
+        menuItems.add(MenuItem("Создать архив") {
+            createArchive()
+            updateMenuItems()
+        })
     }
 
     override fun getMenuTitle() = "Список архивов"
@@ -21,21 +24,20 @@ class ArchiveMenu : Menu() {
     }
 
     fun start() {
-        while (true) {
-            updateMenuItems()
-            super.show()
-        }
+        updateMenuItems()
+        super.show()
     }
 
     private fun updateMenuItems() {
         menuItems.clear()
-        menuItems.add(MenuItem("Создать архив") { createArchive() })
+        menuItems.add(MenuItem("Создать архив") {
+            createArchive()
+            updateMenuItems()
+        })
         archives.forEach { archive ->
-            menuItems.add(MenuItem(archive.name) { openNotesMenu(archive) })
+            menuItems.add(MenuItem(archive.name) {
+                NotesMenu(archive).start()
+            })
         }
     }
-
-    private fun openNotesMenu(archive: Archive) {
-        NotesMenu(archive).start()
-    }
-}
+  }

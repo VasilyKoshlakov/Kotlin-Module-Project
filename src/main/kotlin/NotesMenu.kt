@@ -1,6 +1,9 @@
 class NotesMenu(private val archive: Archive) : Menu() {
     init {
-        menuItems.add(MenuItem("Создать заметку") { createNote() })
+        menuItems.add(MenuItem("Создать заметку") {
+            createNote()
+            updateMenuItems()
+        })
     }
 
     override fun getMenuTitle() = "Список заметок в архиве \"${archive.name}\""
@@ -27,15 +30,17 @@ class NotesMenu(private val archive: Archive) : Menu() {
     }
 
     fun start() {
-        while (true) {
-            updateMenuItems()
-            super.show()
-        }
+        updateMenuItems()
+        super.show()
     }
 
     private fun updateMenuItems() {
         menuItems.clear()
-        menuItems.add(MenuItem("Создать заметку") { createNote() })
+        menuItems.add(MenuItem("Создать заметку") {
+            createNote()
+            updateMenuItems()
+        })
+
         archive.notes.forEach { note ->
             menuItems.add(MenuItem(note.name) { showNote(note) })
         }
