@@ -1,3 +1,8 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+fun main() {
+    println("Приложение \"Заметки\"")
+    val archiveMenu = ArchiveMenu()
+    while (true) {
+        archiveMenu.start()
+        break
+    }
 }
